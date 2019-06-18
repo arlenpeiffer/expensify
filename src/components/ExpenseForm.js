@@ -8,14 +8,17 @@ const now = moment();
 console.log(now.format('MMM Do, YYYY'));
 
 export default class ExpenseForm extends React.Component {
-  state = {
-    amount: '',
-    calendarFocused: false,
-    createdAt: moment(),
-    description: '',
-    error: '',
-    note: ''
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      amount: props.expense ? (props.expense.amount / 100).toString() : '',
+      calendarFocused: false,
+      createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+      description: props.expense ? props.expense.description : '',
+      error: '',
+      note: props.expense ? props.expense.note : ''
+    };
+  }
   onAmountChange = (event) => {
     const amount = event.target.value;
     if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
