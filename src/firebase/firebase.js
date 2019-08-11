@@ -12,6 +12,24 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-firebase.database().ref().set({
-  name: 'Arlen Peiffer'
+const database = firebase.database();
+
+database.ref().set({
+  name: 'Arlen Peiffer',
+  age: 31,
+  isSingle: false,
+  location: {
+    city: 'Los Angeles',
+    country: 'United States'
+  }
+});
+
+// database.ref().set('This is my data.');
+
+database.ref('age').set(32);
+database.ref('location/city').set('South Pasadena');
+
+database.ref('attributes').set({
+  height: 70,
+  weight: 135
 });
