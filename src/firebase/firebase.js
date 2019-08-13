@@ -15,28 +15,57 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 database.ref().set({
-  name: 'Arlen Peiffer',
-  age: 31,
-  stressLevel: 6,
+  name: 'Arlen',
   job: {
     title: 'Software Developer',
-    company: 'Google'
-  },
-  location: {
-    city: 'Los Angeles',
-    country: 'United States'
+    company: 'Amazon'
   }
-}).then(() => {
-  console.log('Data is saved');
-}).catch((error) => {
-  console.log('This failed.', error);
 });
 
-database.ref().update({
-  stressLevel: 9,
-  'job/company': 'Amazon',
-  'location/city': 'Seattle'
+database.ref().on('value', snapshot => {
+  const { name, job } = snapshot.val();
+  const { title, company } = job;
+  console.log(`${name} is a ${title} at ${company}`);
 });
+
+database.ref('job').update({
+  title: 'Software Crafter',
+  company: '8th Light'
+});
+
+// database.ref()
+//   .once('value')
+//   .then((snapshot) => {
+//     const val = snapshot.val();
+//     console.log(val);
+//   })
+//   .catch((error) => {
+//     console.log('Error fetching data', error);
+//   });
+
+// database.ref().set({
+//   name: 'Arlen Peiffer',
+//   age: 31,
+//   stressLevel: 6,
+//   job: {
+//     title: 'Software Developer',
+//     company: 'Google'
+//   },
+//   location: {
+//     city: 'Los Angeles',
+//     country: 'United States'
+//   }
+// }).then(() => {
+//   console.log('Data is saved');
+// }).catch((error) => {
+//   console.log('This failed.', error);
+// });
+
+// database.ref().update({
+//   stressLevel: 9,
+//   'job/company': 'Amazon',
+//   'location/city': 'Seattle'
+// });
 
 // database.ref('isSingle')
 //   .remove()
