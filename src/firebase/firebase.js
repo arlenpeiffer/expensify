@@ -14,24 +14,52 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-database.ref().set({
-  name: 'Arlen',
-  job: {
-    title: 'Software Developer',
-    company: 'Amazon'
-  }
+database.ref('expenses').push({
+  description: 'Gum',
+  note: '',
+  amount: 195,
+  createdAt: 0
 });
 
-database.ref().on('value', snapshot => {
-  const { name, job } = snapshot.val();
-  const { title, company } = job;
-  console.log(`${name} is a ${title} at ${company}`);
+database.ref('expenses').push({
+  description: 'Rent',
+  note: '',
+  amount: 109500,
+  createdAt: 0
 });
 
-database.ref('job').update({
-  title: 'Software Crafter',
-  company: '8th Light'
+database.ref('expenses').push({
+  description: 'Credit Card',
+  note: '',
+  amount: 4500,
+  createdAt: 0
 });
+
+// database.ref('notes/-LmAhbxLbR3lmbiBpgEZ').remove();
+
+// database.ref('notes').push({
+//   title: 'Course Topics',
+//   body: 'React Native, Angular, Python'
+// });
+
+// database.ref().set({
+//   name: 'Arlen',
+//   job: {
+//     title: 'Software Developer',
+//     company: 'Amazon'
+//   }
+// });
+
+// database.ref().on('value', snapshot => {
+//   const { name, job } = snapshot.val();
+//   const { title, company } = job;
+//   console.log(`${name} is a ${title} at ${company}`);
+// });
+
+// database.ref('job').update({
+//   title: 'Software Crafter',
+//   company: '8th Light'
+// });
 
 // database.ref()
 //   .once('value')
